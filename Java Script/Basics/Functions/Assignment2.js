@@ -3,6 +3,7 @@
 // GPT 
 
 const startTime = performance.now();
+// Hello
 
 setTimeout(() => {
     const endTime = performance.now();
