@@ -1,0 +1,39 @@
+JavaScript Browser Architecture
+
+The architecture of a modern web browser involves several key components that work together to run JavaScript and render web pages. Here are the key components:
+
+1. **Browser Components**:
+   - **Rendering Engine**: Responsible for displaying the web page. It interprets HTML, CSS, and JavaScript to render the webpage. Examples include Blink (Chrome), Gecko (Firefox), and WebKit (Safari).
+   - **JavaScript Engine**: Responsible for interpreting and executing JavaScript code. Examples include V8 (Chrome), SpiderMonkey (Firefox), and JavaScriptCore (Safari).
+   - **UI Thread**: Handles user interactions and manages the UI components like buttons, address bar, etc.
+   - **Event Loop**: It is a process that continuously checks the call stack and callback queue to ensure asynchronous operations are handled in the right order.
+
+2. **How JavaScript Runs in the Browser**:
+   - **Call Stack**: This is where all the function calls are managed. When a function is called, it is pushed onto the stack. Once the function finishes, it is popped off the stack.
+   - **Web APIs**: These are browser-specific APIs like `setTimeout`, `fetch`, and DOM manipulation APIs that are accessible to JavaScript running in the browser.
+   - **Callback Queue**: When an asynchronous operation (like `setTimeout` or `fetch`) completes, its callback function is placed in the callback queue. The event loop checks if the call stack is empty and moves the callback function from the queue to the stack for execution.
+
+3. **Execution Process**:
+   - **Synchronous JavaScript**: When a JavaScript function is called, it is pushed to the call stack and executed immediately. The execution blocks the rest of the code until the function completes.
+   - **Asynchronous JavaScript**: JavaScript can delegate some tasks (like HTTP requests or timers) to the browser's Web APIs. These operations run in the background, and their callback functions are placed in the callback queue. Once the call stack is empty, the event loop moves the callback functions to the stack for execution.
+
+4. **Rendering Process**:
+   - The **Rendering Engine** takes HTML, CSS, and JavaScript and combines them to display the webpage. It processes the HTML DOM tree and CSSOM (CSS Object Model) to create a **render tree** that represents the visible parts of the webpage.
+   - JavaScript can modify the DOM, causing the rendering engine to re-render the webpage, which can affect performance.
+
+5. **Event Loop**:
+   - The event loop is the core component of JavaScript's asynchronous nature. It constantly checks the call stack to see if it's empty. If the stack is empty, it will process the tasks in the callback queue (such as events, timers, or data from `fetch` requests).
+
+6. **Rendering Cycle**:
+   - The browser follows a rendering cycle where it repeatedly fetches resources (HTML, CSS, JS), applies styles, and renders the page. JavaScript interacts with the rendering engine by modifying the DOM, which can trigger reflows and repaints of the page.
+
+Example of how JS interacts with the Browser:
+
+1. A JavaScript file is loaded by the browser.
+2. The JavaScript engine executes the code, and function calls are pushed to the call stack.
+3. Asynchronous operations like `setTimeout`, AJAX, or event listeners are sent to the Web APIs, and once completed, their callbacks are added to the callback queue.
+4. The event loop checks if the call stack is empty, and if it is, the callback is moved from the callback queue to the call stack for execution.
+5. The rendering engine uses the manipulated DOM to update the visual representation of the page.
+
+Conclusion:
+The browser architecture enables a single-threaded environment where JavaScript runs in the main thread, but asynchronous tasks like events, timers, and network requests can be handled using Web APIs and the callback queue. This ensures a non-blocking, responsive web page experience.
